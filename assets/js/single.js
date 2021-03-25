@@ -1,17 +1,16 @@
 var repoNameEl = document.querySelector("#repo-name");
 var issueContainerEl = document.querySelector("#issues-container");
 var limitWarningEl = document.querySelector("#limit-warning");
-var repoNameEl = document.querySelector("#repo-name");
 
-var getRepoName = function() {
+var getRepoName = function () {
     // grab repo name from url query string
     var queryString = document.location.search;
     var repoName = queryString.split("=")[1];
 
     if (repoName) {
-        // diplay repo name on the page
+        // display repo name on the page
         repoNameEl.textContent = repoName;
-        
+
         getRepoIssues(repoName);
     } else {
         // if no repo was given, redirect to the homepage
@@ -35,14 +34,11 @@ var getRepoIssues = function (repo) {
                     displayWarning(repo);
                 }
             });
-        }
-        else {
+        } else {
             // if not successful, redirect to homepage
             document.location.replace("./index.html");
         }
     });
-
-    getRepoName();
 };
 
 var displayIssues = function (issues) {
@@ -63,7 +59,6 @@ var displayIssues = function (issues) {
         var titleEl = document.createElement("span");
         titleEl.textContent = issues[i].title;
 
-
         // append to container
         issueEl.appendChild(titleEl);
 
@@ -73,8 +68,7 @@ var displayIssues = function (issues) {
         // check if issue is an actual issue or a pull request
         if (issues[i].pull_request) {
             typeEl.textContent = "(Pull request)";
-        }
-        else {
+        } else {
             typeEl.textContent = "(Issue)";
         }
 
@@ -101,4 +95,3 @@ var displayWarning = function (repo) {
 };
 
 getRepoName();
-getRepoIssues();
